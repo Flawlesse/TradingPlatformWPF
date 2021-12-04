@@ -1,0 +1,66 @@
+﻿<Page x:Class="TradingPlatform.Pages.UserNavPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TradingPlatform.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="300"
+      Title="UserNavPage">
+    <Page.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="CustomButtonStyle">
+            <Setter Property="Background" Value="#363635"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#8C8F8F"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+    
+    
+    <DockPanel LastChildFill="False">
+        <StackPanel DockPanel.Dock="Top" Background="#363635" Height="Auto">
+            <StackPanel Orientation="Horizontal">
+                <Image x:Name="ProfileImg" 
+                   Width="50" Height="50">
+                    <Image.Source>
+                        <Binding Path="PhotoURI">
+                            <Binding.TargetNullValue>
+                                <BitmapImage UriSource="/Assets/DefUser.png" />
+                            </Binding.TargetNullValue>
+                        </Binding>
+                    </Image.Source>
+                    <Image.Clip>
+                        <EllipseGeometry Center="25,25" RadiusX="25" RadiusY="25"></EllipseGeometry>
+                    </Image.Clip>
+                </Image>
+                <TextBlock Text="{Binding Path=Username}" FontSize="16" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Button x:Name="MyProductsBtn" Height="30" Content="Мои товары" Foreground="White"
+                    Style="{StaticResource CustomButtonStyle}"/>
+            <Button x:Name="RunningDealsBtn" Height="30" Content="Активные сделки" Foreground="White"
+                    Style="{StaticResource CustomButtonStyle}"/>
+            <Button x:Name="MyWalletsBtn" Height="30" Content="Мои кошельки" Foreground="White"
+                    Style="{StaticResource CustomButtonStyle}"/>
+            <Button x:Name="AdminLogListBtn" Content="Просмотреть логи" Height="30" Foreground="White"
+                    Style="{StaticResource CustomButtonStyle}" Visibility="Collapsed"/>
+            <Button x:Name="AdminUserManagementListBtn" Content="Управление пользователями" Height="30" Foreground="White"
+                    Style="{StaticResource CustomButtonStyle}" Visibility="Collapsed"/>
+        </StackPanel>
+        <Button DockPanel.Dock="Bottom" x:Name="ExitBtn" Content="Выйти" Height="30" Foreground="White"
+                Style="{StaticResource CustomButtonStyle}"/>
+    </DockPanel>
+</Page>

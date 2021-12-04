@@ -1,0 +1,30 @@
+﻿<Window x:Class="TradingPlatform.Windows.RegistrationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradingPlatform.Windows"
+        mc:Ignorable="d"
+        Title="Регистрация" Height="400" Width="400">
+    <Grid Background="#726da8">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Логин" HorizontalAlignment="Center" Foreground="White"></TextBlock>
+            <TextBox x:Name="UsernameTB" 
+                     MaxLength="40" MaxLines="1" FontSize="16" Width="200" 
+                     Background="LightGray" TextChanged="TextChanged"/>
+            <TextBlock Text="Пароль" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="White"></TextBlock>
+            <PasswordBox x:Name="PasswordPB" FontSize="16" MaxLength="40" 
+                         Width="200" Background="LightGray" 
+                         PasswordChanged="PasswordChanged"/>
+            <TextBlock x:Name="PasswordsDontMatch" Text="Пароли не совпадают" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="Red" Visibility="Collapsed"></TextBlock>
+            <TextBlock Text="Повторите пароль" HorizontalAlignment="Center" Margin="0,10,0,0" Foreground="White"></TextBlock>
+            <PasswordBox x:Name="PasswordRepPB" FontSize="16" Width="200" 
+                         Background="LightGray" MaxLength="40"
+                         PasswordChanged="PasswordChanged"/>
+            <Button x:Name="RegisterBtn" Margin="0,10,0,0" Content="Зарегистрироваться" Background="AliceBlue" Width="130"
+                    Click="RegisterBtn_Click" IsEnabled="False"/>
+            <Button x:Name="EnterBtn" Margin="0,5,0,0" Content="Вход" Background="#726da8" Foreground="Blue" Width="30"
+                    Click="EnterBtn_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
