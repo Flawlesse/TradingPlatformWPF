@@ -16,6 +16,8 @@ using System.Data;
 using System.Configuration;
 using System.Data.Sql;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Windows.Forms;
 
 namespace TradingPlatform.Windows
 {
@@ -24,23 +26,49 @@ namespace TradingPlatform.Windows
     /// </summary>
     public partial class RegistrationWindow : Window
     {
+        public string selectedPhotoURI = null;
         public RegistrationWindow()
         {
             InitializeComponent();
+            DataContext = selectedPhotoURI;
         }
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
             Logger logger = LogManager.getInstance();
             bool error_happened = false;
+
+            string username = UsernameTB.Text.Trim();
+            string ext = System.IO.Path.GetExtension(selectedPhotoURI);
+            string photoURIToMove = System.IO.Path.Combine(Environment.CurrentDirectory, $"Images\\{username + ext}");
+
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                var cmd = new SqlCommand("INSERT INTO Account (username, password) " +
-                    $"VALUES (@un, @ps);", connection);
-                cmd.Parameters.AddWithValue("@un", UsernameTB.Text.Trim());
+                var cmd = new SqlCommand("INSERT INTO Account (username, password, photo) " +
+                    $"VALUES (@un, @ps, @ph);", connection);
+                cmd.Parameters.AddWithValue("@un", username);
                 cmd.Parameters.AddWithValue("@ps", PasswordPB.Password);
+
+                if (selectedPhotoURI != null)
+                {
+                    try
+                    {
+                        string dirImages = System.IO.Path.Combine(Environment.CurrentDirectory, "Images");
+                        if (!Directory.Exists(dirImages))
+                        {
+                            Directory.CreateDirectory(dirImages);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Windows.MessageBox.Show(ex.Message);
+                        return;
+                    }
+                }
+                cmd.Parameters.AddWithValue("@ph", (selectedPhotoURI != null) ? (object)photoURIToMove : DBNull.Value);
+
                 try
                 {
                     cmd.ExecuteNonQuery();
@@ -49,7 +77,7 @@ namespace TradingPlatform.Windows
                 catch (SqlException ex)
                 {
                     error_happened = true;
-                    MessageBox.Show("Что-то пошло не так. Скорее всего пользователь с данным логином уже существует.");
+                    System.Windows.MessageBox.Show("Что-то пошло не так. Скорее всего пользователь с данным логином уже существует.");
                     logger.LogError(ex);
                     Reset();
                 }
@@ -58,7 +86,11 @@ namespace TradingPlatform.Windows
 
             if (!error_happened)
             {
-                MessageBox.Show("Отлично, вы прошли регистрацию! Далее выполните вход.");
+                System.Windows.MessageBox.Show("Отлично, вы прошли регистрацию! Далее выполните вход.");
+                if (selectedPhotoURI != null)
+                {
+                    File.Copy(selectedPhotoURI, photoURIToMove);
+                }
                 LoginWindow loginWindow = new LoginWindow(UsernameTB.Text.Trim(), PasswordPB.Password);
                 loginWindow.Show();
                 Close();
@@ -124,6 +156,21 @@ namespace TradingPlatform.Windows
             UsernameTB.Text = UsernameTB.Text.Trim();
             PasswordPB.Password = "";
             PasswordRepPB.Password = "";
+        }
+
+        private void ProfileImg_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            using (var fd = new OpenFileDialog())
+            {
+                fd.Filter = "ImageFiles(*.BMP;*.JPG;*.GIF,*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG";
+                System.Windows.Forms.DialogResult res = fd.ShowDialog();
+                if (res == System.Windows.Forms.DialogResult.OK || res == System.Windows.Forms.DialogResult.Yes)
+                {
+                    Uri fileUri = new Uri(fd.FileName);
+                    selectedPhotoURI = fileUri.OriginalString;
+                    ProfileImg.Source = new BitmapImage(fileUri);
+                }
+            }
         }
     }
 }

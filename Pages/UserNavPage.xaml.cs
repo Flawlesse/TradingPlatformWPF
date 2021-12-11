@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using TradingPlatform.Models;
 using System.Configuration;
 using System.Data.SqlClient;
+using TradingPlatform.Windows;
 
 namespace TradingPlatform.Pages
 {
@@ -50,6 +51,17 @@ namespace TradingPlatform.Pages
                 }
 
                 connection.Close();
+            }
+        }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Вы действительно хотите выйти?", "Выйти из аккаунта", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                LoginWindow loginWindow = new LoginWindow();
+                var currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                loginWindow.Show();
+                currentWindow.Close();
             }
         }
     }

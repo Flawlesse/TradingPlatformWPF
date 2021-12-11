@@ -33,7 +33,7 @@
     
     <DockPanel LastChildFill="False">
         <StackPanel DockPanel.Dock="Top" Background="#363635" Height="Auto">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
                 <Image x:Name="ProfileImg" 
                    Width="50" Height="50">
                     <Image.Source>
@@ -61,6 +61,6 @@
                     Style="{StaticResource CustomButtonStyle}" Visibility="Collapsed"/>
         </StackPanel>
         <Button DockPanel.Dock="Bottom" x:Name="ExitBtn" Content="Выйти" Height="30" Foreground="White"
-                Style="{StaticResource CustomButtonStyle}"/>
+                Style="{StaticResource CustomButtonStyle}" Click="ExitBtn_Click"/>
     </DockPanel>
 </Page>

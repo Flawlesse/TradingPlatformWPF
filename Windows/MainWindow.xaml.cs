@@ -35,6 +35,5 @@ namespace TradingPlatform.Windows
 
             UserNavFrame.Content = new UserNavPage(CurrentAccount);
         }
-
     }
 }

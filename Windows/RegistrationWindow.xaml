@@ -8,6 +8,21 @@
         Title="Регистрация" Height="400" Width="400">
     <Grid Background="#726da8">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image x:Name="ProfileImg" 
+                   Width="70" Height="70"
+                   Margin="0,0,0,10" MouseLeftButtonUp="ProfileImg_MouseLeftButtonUp">
+                <Image.Source>
+                    <Binding>
+                        <Binding.TargetNullValue>
+                            <BitmapImage UriSource="/Assets/DefUser.png" />
+                        </Binding.TargetNullValue>
+                    </Binding>
+                </Image.Source>
+                <Image.Clip>
+                    <EllipseGeometry Center="35,35" RadiusX="35" RadiusY="35"></EllipseGeometry>
+                </Image.Clip>
+            </Image>
+
             <TextBlock Text="Логин" HorizontalAlignment="Center" Foreground="White"></TextBlock>
             <TextBox x:Name="UsernameTB" 
                      MaxLength="40" MaxLines="1" FontSize="16" Width="200" 
