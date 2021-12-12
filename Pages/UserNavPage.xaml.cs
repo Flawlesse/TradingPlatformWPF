@@ -25,8 +25,10 @@ namespace TradingPlatform.Pages
     public partial class UserNavPage : Page
     {
         public Account CurrentAccount { get; set; }
-        public UserNavPage(Account account)
+        Frame ContentFrame { get; set; }
+        public UserNavPage(Account account, Frame frame)
         {
+            ContentFrame = frame;
             CurrentAccount = account;
             InitializeComponent();
             DataContext = CurrentAccount;
@@ -63,6 +65,12 @@ namespace TradingPlatform.Pages
                 loginWindow.Show();
                 currentWindow.Close();
             }
+        }
+
+        private void MyProductsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ContentFrame.NavigationService.RemoveBackEntry();
+            ContentFrame.NavigationService.Navigate(new MyProductListPage(CurrentAccount));
         }
     }
 }

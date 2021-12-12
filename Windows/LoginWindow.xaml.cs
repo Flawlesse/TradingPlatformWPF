@@ -46,7 +46,7 @@ namespace TradingPlatform.Windows
             using(var connection = new SqlConnection(connectStr))
             {
                 connection.Open();
-                var cmd = new SqlCommand("SELECT * FROM Account WHERE (username = @un AND password = @ps)",
+                var cmd = new SqlCommand("SELECT * FROM Account WHERE (username = @un AND password = @ps);",
                     connection);
                 cmd.Parameters.AddWithValue("@un", UsernameTB.Text.Trim());
                 cmd.Parameters.AddWithValue("@ps", PasswordPB.Password);

@@ -60,12 +60,91 @@
     <Compile Include="Exceptions.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Pages\Admin\AccountDetailPage.xaml.cs">
+      <DependentUpon>AccountDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\AccountListPage.xaml.cs">
+      <DependentUpon>AccountListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\WalletDetailPage.xaml.cs">
+      <DependentUpon>WalletDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\WalletEditPage.xaml.cs">
+      <DependentUpon>WalletEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Admin\WalletListPage.xaml.cs">
+      <DependentUpon>WalletListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DealDetailPage.xaml.cs">
+      <DependentUpon>DealDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\DealListPage.xaml.cs">
+      <DependentUpon>DealListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CreateEditProductPage.xaml.cs">
+      <DependentUpon>CreateEditProductPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MyProductListPage.xaml.cs">
+      <DependentUpon>MyProductListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\MyWalletsPage.xaml.cs">
+      <DependentUpon>MyWalletsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ProductDetailPage.xaml.cs">
+      <DependentUpon>ProductDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\UserNavPage.xaml.cs">
       <DependentUpon>UserNavPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\RegistrationWindow.xaml.cs">
       <DependentUpon>RegistrationWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\Admin\AccountDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Admin\AccountListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Admin\WalletDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Admin\WalletEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Admin\WalletListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DealDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\DealListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\CreateEditProductPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MyProductListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\MyWalletsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ProductDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\UserNavPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -123,6 +202,8 @@
   <ItemGroup>
     <Resource Include="Assets\DefUser.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Assets\DefProduct.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

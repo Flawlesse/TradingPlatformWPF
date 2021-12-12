@@ -50,7 +50,7 @@
                 <TextBlock Text="{Binding Path=Username}" FontSize="16" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center"/>
             </StackPanel>
             <Button x:Name="MyProductsBtn" Height="30" Content="Мои товары" Foreground="White"
-                    Style="{StaticResource CustomButtonStyle}"/>
+                    Style="{StaticResource CustomButtonStyle}" Click="MyProductsBtn_Click"/>
             <Button x:Name="RunningDealsBtn" Height="30" Content="Активные сделки" Foreground="White"
                     Style="{StaticResource CustomButtonStyle}"/>
             <Button x:Name="MyWalletsBtn" Height="30" Content="Мои кошельки" Foreground="White"

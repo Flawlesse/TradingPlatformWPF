@@ -27,6 +27,6 @@
         <Frame Name="ContentFrame"
                Grid.Row="1" Grid.Column="1"
                Padding="20"
-               Background="#726da8"/>
+               Background="#726da8" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

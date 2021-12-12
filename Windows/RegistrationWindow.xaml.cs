@@ -39,8 +39,8 @@ namespace TradingPlatform.Windows
             bool error_happened = false;
 
             string username = UsernameTB.Text.Trim();
-            string ext = System.IO.Path.GetExtension(selectedPhotoURI);
-            string photoURIToMove = System.IO.Path.Combine(Environment.CurrentDirectory, $"Images\\{username + ext}");
+            string ext = null;
+            string photoURIToMove = null;
 
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
             using (var connection = new SqlConnection(connectionString))
@@ -53,6 +53,8 @@ namespace TradingPlatform.Windows
 
                 if (selectedPhotoURI != null)
                 {
+                    ext = System.IO.Path.GetExtension(selectedPhotoURI);
+                    photoURIToMove = System.IO.Path.Combine(Environment.CurrentDirectory, $"Images\\{username + ext}");
                     try
                     {
                         string dirImages = System.IO.Path.Combine(Environment.CurrentDirectory, "Images");
@@ -89,7 +91,7 @@ namespace TradingPlatform.Windows
                 System.Windows.MessageBox.Show("Отлично, вы прошли регистрацию! Далее выполните вход.");
                 if (selectedPhotoURI != null)
                 {
-                    File.Copy(selectedPhotoURI, photoURIToMove);
+                    File.Copy(selectedPhotoURI, photoURIToMove, true);
                 }
                 LoginWindow loginWindow = new LoginWindow(UsernameTB.Text.Trim(), PasswordPB.Password);
                 loginWindow.Show();

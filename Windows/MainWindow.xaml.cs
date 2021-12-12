@@ -33,7 +33,7 @@ namespace TradingPlatform.Windows
             CurrentAccount = account;
             InitializeComponent();
 
-            UserNavFrame.Content = new UserNavPage(CurrentAccount);
+            UserNavFrame.Content = new UserNavPage(CurrentAccount, ContentFrame);
         }
     }
 }
