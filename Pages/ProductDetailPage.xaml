@@ -29,14 +29,15 @@
                     </Image.Source>
                 </Image>
                 <TextBlock Text="{Binding Path=Category.Name, StringFormat=Категория: {0}}" Margin="0,0,0,20" Foreground="White" 
-                           TextWrapping="Wrap" FontSize="16"/>
+                           TextWrapping="Wrap" FontSize="20"/>
                 <TextBlock Text="{Binding Path=Name, StringFormat=Наименование: {0}}" Margin="0,0,0,20" Foreground="White" 
-                           TextWrapping="Wrap" FontSize="16"/>
-                <TextBlock Text="{Binding Path=Price, StringFormat=Цена: \{0:C\}$}" Margin="0,0,0,20"/>
+                           TextWrapping="Wrap" FontSize="20"/>
+                <TextBlock Text="{Binding Path=Price, StringFormat=Цена: \{0:C\}$}" Margin="0,0,0,20"
+                           Foreground="White" FontSize="20"/>
             </StackPanel>
             <ScrollViewer Grid.Column="1">
                 <TextBox Text="{Binding Path=Description}" Background="#3E3A5E" Foreground="White" 
-                         TextWrapping="Wrap" FontSize="16"></TextBox>
+                         TextWrapping="Wrap" FontSize="18" IsReadOnly="True"></TextBox>
             </ScrollViewer>
         </Grid>
 

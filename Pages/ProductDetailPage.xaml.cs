@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using TradingPlatform.Models;
 using System.Data.SqlClient;
 using System.Configuration;
+using TradingPlatform;
 
 namespace TradingPlatform.Pages
 {
@@ -32,6 +33,12 @@ namespace TradingPlatform.Pages
 
             CurrentAccount = account;
             ProductSelected = GetProductFromDB(product, id);
+
+            bool canEditDeleteProduct = CanEditDeleteProduct(ProductSelected);
+            EditBtn.Visibility = canEditDeleteProduct ? Visibility.Visible : Visibility.Collapsed;
+            DeleteBtn.Visibility = canEditDeleteProduct ? Visibility.Visible : Visibility.Collapsed;
+            MakeDealBtn.Visibility = canEditDeleteProduct ? Visibility.Visible : Visibility.Collapsed;
+
             DataContext = ProductSelected;
         }
 
@@ -87,6 +94,65 @@ namespace TradingPlatform.Pages
                 LogManager.getInstance().LogInfo($"Выполнено действие Показать продукт полностью над продуктом {product.Name}");
             }
             return product ?? new Product();
+        }
+
+        private bool CanEditDeleteProduct(Product prod)
+        {
+            bool error_happened = false;
+            using(var connection = new SqlConnection(_connStr))
+            {
+                connection.Open();
+
+                var cmd = new SqlCommand(
+                    "SELECT * FROM SupplierGroup " +
+                    "WHERE account_id = @id;", connection);
+                cmd.Parameters.AddWithValue("@id", CurrentAccount.Id);
+                try
+                {
+                    var reader = cmd.ExecuteReader();
+                    if (!reader.Read())
+                    {
+                        reader.Close();
+                        throw new NoResultSelectedException($"Пользователь {CurrentAccount.Username} не состоит в группе SupplierGroup.");
+                    }
+                    reader.Close();
+
+                } catch (SqlException ex)
+                {
+                    error_happened = true;
+                    System.Windows.MessageBox.Show(ex.Message);
+                    LogManager.getInstance().LogError(ex);
+                } catch (NoResultSelectedException ex)
+                {
+                    LogManager.getInstance().LogWarning(ex.Message);
+                    connection.Close();
+                    return false;
+                }
+
+                cmd = new SqlCommand(
+                    "SELECT * FROM Deal " +
+                    "WHERE product_id = @id;", connection);
+                cmd.Parameters.AddWithValue("@id", ProductSelected.Id);
+                try
+                {
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        string msg = $"Товар {ProductSelected.Name} находится в состоянии сделки.";
+                        LogManager.getInstance().LogWarning(msg);
+                        connection.Close();
+                        return false;
+                    }
+                } catch (SqlException ex)
+                {
+                    error_happened = true;
+                    System.Windows.MessageBox.Show(ex.Message);
+                    LogManager.getInstance().LogError(ex);
+                }
+
+                connection.Close();
+            }
+            return !error_happened;
         }
 
         private void GoBackBtn_Click(object sender, RoutedEventArgs e)

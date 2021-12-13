@@ -47,7 +47,7 @@
                         <EllipseGeometry Center="25,25" RadiusX="25" RadiusY="25"></EllipseGeometry>
                     </Image.Clip>
                 </Image>
-                <TextBlock Text="{Binding Path=Username}" FontSize="16" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center"/>
+                <!--<TextBlock Text="{Binding Path=Username}" FontSize="16" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center"/>-->
             </StackPanel>
             <Button x:Name="MyProductsBtn" Height="30" Content="Мои товары" Foreground="White"
                     Style="{StaticResource CustomButtonStyle}" Click="MyProductsBtn_Click"/>

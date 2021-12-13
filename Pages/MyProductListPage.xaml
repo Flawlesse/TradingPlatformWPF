@@ -27,13 +27,17 @@
 
                                 <StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Path=Name, StringFormat=Наименование: {0}}"/>
-                                        <TextBlock Margin="30,0,0,0" Text="{Binding Path=Category.Name, StringFormat=Категория: {0}}"/>
+                                        <TextBlock Text="{Binding Path=Name, StringFormat=Наименование: {0}}"
+                                                   FontSize="16" Foreground="White" TextWrapping="Wrap"/>
+                                        <TextBlock Margin="30,0,0,0" Text="{Binding Path=Category.Name, StringFormat=Категория: {0}}"
+                                                   FontSize="16" Foreground="White" TextWrapping="Wrap"/>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Path=Price, StringFormat=Цена: \{0:C\}$}"/>
-                                        <Button Margin="60,0,0,0" Content="Показать" Click="ShowProductBtnClick" 
-                                                DataContext="{Binding Path=Id}"/>
+                                        <TextBlock Text="{Binding Path=Price, StringFormat=Цена: \{0:C\}$}"
+                                                   FontSize="16" Foreground="White"/>
+                                        <Button Margin="60,20,0,0" Content="Показать" Click="ShowProductBtnClick" 
+                                                DataContext="{Binding Path=Id}" FontSize="24"
+                                                Foreground="White" Background="BlueViolet"/>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>

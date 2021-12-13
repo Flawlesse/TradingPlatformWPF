@@ -32,6 +32,7 @@ namespace TradingPlatform.Windows
         {
             CurrentAccount = account;
             InitializeComponent();
+            UsernameTextBlock.Text = account.Username;
 
             UserNavFrame.Content = new UserNavPage(CurrentAccount, ContentFrame);
         }

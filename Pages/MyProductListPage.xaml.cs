@@ -34,6 +34,8 @@ namespace TradingPlatform.Pages
             CurrentAccount = account;
             ListOfMyProucts = GetMyProductsFromDB();
             myProductsLB.ItemsSource = ListOfMyProucts;
+
+            CreateBtn.Visibility = CanCreateProduct() ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void CreateBtn_Click(object sender, RoutedEventArgs e)
@@ -102,6 +104,44 @@ namespace TradingPlatform.Pages
                 LogManager.getInstance().LogInfo("Выполнено действие Показать мои товары.");
             }
             return products;
+        }
+
+        private bool CanCreateProduct()
+        {
+            bool error_happened = false;
+            using (var connection = new SqlConnection(_connStr))
+            {
+                connection.Open();
+
+                var cmd = new SqlCommand(
+                    "SELECT * FROM SupplierGroup " +
+                    "WHERE account_id = @id;", connection);
+                cmd.Parameters.AddWithValue("@id", CurrentAccount.Id);
+                try
+                {
+                    var reader = cmd.ExecuteReader();
+                    if (!reader.Read())
+                    {
+                        throw new NoResultSelectedException($"Пользователь {CurrentAccount.Username} не состоит в группе SupplierGroup.");
+                    }
+
+                }
+                catch (SqlException ex)
+                {
+                    error_happened = true;
+                    System.Windows.MessageBox.Show(ex.Message);
+                    LogManager.getInstance().LogError(ex);
+                }
+                catch (NoResultSelectedException ex)
+                {
+                    LogManager.getInstance().LogWarning(ex.Message);
+                    connection.Close();
+                    return false;
+                }
+
+                connection.Close();
+            }
+            return !error_happened;
         }
     }
 }

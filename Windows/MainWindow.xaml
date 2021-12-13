@@ -16,10 +16,12 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
 
-        <Frame Name="NavBarFrame"
+        <Grid Name="NavBarFrame"
                Grid.Row="0" Grid.Column="0"
-               Padding="20"
-               Grid.ColumnSpan="2" Background="#4F4F4E" />
+               Grid.ColumnSpan="2" Background="#4F4F4E" >
+            <TextBlock x:Name="UsernameTextBlock" FontSize="20" Foreground="White" TextWrapping="Wrap" VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+        </Grid>
         <Frame Name="UserNavFrame" 
                Grid.Row="1" Grid.Column="0"
                Padding="20"

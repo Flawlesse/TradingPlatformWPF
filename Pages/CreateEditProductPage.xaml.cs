@@ -229,5 +229,17 @@ namespace TradingPlatform.Pages
                 }
             }
         }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.RemoveBackEntry();
+            if (_isCreateWindow)
+            {
+                NavigationService.Navigate(new MyProductListPage(CurrentAccount));
+            } else
+            {
+                NavigationService.Navigate(new ProductDetailPage(CurrentAccount, null, CurrentProduct.Id));
+            }
+        }
     }
 }

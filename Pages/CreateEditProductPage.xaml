@@ -19,7 +19,7 @@
                     </Binding>
                 </Image.Source>
             </Image>
-            
+
             <DockPanel LastChildFill="False" HorizontalAlignment="Center" Margin="10">
                 <ComboBox x:Name="CategoryCB" DockPanel.Dock="Right" Width="200" SelectionChanged="CategoryCB_SelectionChanged"
                           DisplayMemberPath="Name"/>
@@ -43,8 +43,12 @@
             </DockPanel>
 
 
-            <Button x:Name="CreateEditBtn" Content="*sample text*" Click="CreateEditBtn_Click" HorizontalAlignment="Center"
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="CreateEditBtn" Content="*sample text*" Click="CreateEditBtn_Click" HorizontalAlignment="Center"
                     IsEnabled="False"/>
+                <Button x:Name="BackBtn" Click="BackBtn_Click" Content="Назад" Background="OrangeRed" Width="50" Margin="20,0,0,0"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>
